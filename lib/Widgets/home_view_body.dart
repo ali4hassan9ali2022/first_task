@@ -43,7 +43,9 @@ class HomeViewBody extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               itemCount: AppHelper.cards.length,
               itemBuilder: (context, index) {
-                return CustomCardWidget(item: AppHelper.cards[index]);
+                return InkWell(
+                  child: CustomCardWidget(item: AppHelper.cards[index]),
+                );
               },
             ),
           ],
