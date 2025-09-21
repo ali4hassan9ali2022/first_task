@@ -1,3 +1,4 @@
+import 'package:first_task/Utilities/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -30,7 +31,7 @@ class CustomFieldWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             children: [
-              Icon(Icons.home, color: Color(0xff4bb3cd), size: 30.sp),
+              Icon(Icons.home, color: AppColor.kPrimaryColor, size: 30.sp),
               SizedBox(width: 8.w),
               Text(
                 "RIYADH STORE",
