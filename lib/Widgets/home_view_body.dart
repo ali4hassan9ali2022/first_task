@@ -1,3 +1,4 @@
+import 'package:first_task/Utilities/strings.dart';
 import 'package:flutter/material.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -11,10 +12,10 @@ class HomeViewBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            "Branch",
+            Strings.kBranch,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
           ),
-          
+
         ],
       ),
     );
