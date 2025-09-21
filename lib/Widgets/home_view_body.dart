@@ -1,3 +1,4 @@
+import 'package:first_task/Modules/Home/home_controller.dart';
 import 'package:first_task/Utilities/app_helper.dart';
 import 'package:first_task/Utilities/strings.dart';
 import 'package:first_task/Widgets/custom_card_widget.dart';
@@ -6,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeViewBody extends StatelessWidget {
-  const HomeViewBody({super.key});
-
+  const HomeViewBody({super.key, required this.homeController});
+  final HomeController homeController;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,11 +30,15 @@ class HomeViewBody extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               children: [
-                CustomFieldWidget(),
+                CustomBranchFieldWidget(
+                  employeeModel: homeController.employee!,
+                ),
                 SizedBox(height: 6.h),
-                CustomFieldWidget(),
+                CustomNameFieldWidget(employeeModel: homeController.employee!),
                 SizedBox(height: 6.h),
-                CustomFieldWidget(),
+                CustomNumberFieldWidget(
+                  employeeModel: homeController.employee!,
+                ),
               ],
             ),
             SizedBox(height: 16.h),
