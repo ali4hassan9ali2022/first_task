@@ -3,14 +3,32 @@ import 'package:first_task/Utilities/app_helper.dart';
 import 'package:first_task/Utilities/strings.dart';
 import 'package:first_task/Widgets/custom_card_widget.dart';
 import 'package:first_task/Widgets/custom_field_widget.dart';
+import 'package:first_task/Widgets/custom_shimmer_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
-class HomeViewBody extends StatelessWidget {
-  const HomeViewBody({super.key, required this.homeController});
-  final HomeController homeController;
+class HomeViewBody extends StatefulWidget {
+  const HomeViewBody({super.key});
+
+  @override
+  State<HomeViewBody> createState() => _HomeViewBodyState();
+}
+
+class _HomeViewBodyState extends State<HomeViewBody> {
+  @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(
+      () =>
+          Provider.of<HomeController>(context, listen: false).getEmployeeData(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<HomeController>(context);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
       child: SingleChildScrollView(
@@ -26,21 +44,39 @@ class HomeViewBody extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8.h),
-            ListView(
+            controller.isLoading
+                ? ListView(
+                    shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              children: [
-                CustomBranchFieldWidget(
-                  employeeModel: homeController.employee!,
-                ),
-                SizedBox(height: 6.h),
-                CustomNameFieldWidget(employeeModel: homeController.employee!),
-                SizedBox(height: 6.h),
-                CustomNumberFieldWidget(
-                  employeeModel: homeController.employee!,
-                ),
-              ],
-            ),
+                  children: [
+                    CustomShimmerFieldWidget(),
+                    SizedBox(height: 6.h),
+                    CustomShimmerFieldWidget(),
+                    SizedBox(height: 6.h),
+                    CustomShimmerFieldWidget(),
+                  ],
+                )
+                : controller.error != null
+                ? Text("Error: ${controller.error}")
+                : controller.employee != null
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomBranchFieldWidget(
+                        employeeModel: controller.employee!,
+                      ),
+                      SizedBox(height: 6.h),
+                      CustomNameFieldWidget(
+                        employeeModel: controller.employee!,
+                      ),
+                      SizedBox(height: 6.h),
+                      CustomNumberFieldWidget(
+                        employeeModel: controller.employee!,
+                      ),
+                    ],
+                  )
+                : const Text("No data available"),
+
             SizedBox(height: 16.h),
             ListView.separated(
               separatorBuilder: (context, index) => SizedBox(height: 16.h),

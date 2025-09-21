@@ -87,7 +87,6 @@ class CustomNameFieldWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 16.sp,
-
                     fontWeight: FontWeight.w500,
                   ),
                 ),
