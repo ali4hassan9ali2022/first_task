@@ -6,29 +6,30 @@ import 'package:first_task/Widgets/custom_field_widget.dart';
 import 'package:first_task/Widgets/custom_shimmer_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 
 class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
 
   @override
-  State<HomeViewBody> createState() => _HomeViewBodyState();
+  State createState() => _HomeViewBodyState();
 }
 
-class _HomeViewBodyState extends State<HomeViewBody> {
+class _HomeViewBodyState extends StateMVC<HomeViewBody> {
+  late HomeController _controller;
+
+  _HomeViewBodyState() : super(HomeController()) {
+    _controller = controller as HomeController;
+  }
+
   @override
   void initState() {
     super.initState();
-
-    Future.microtask(
-      () =>
-          Provider.of<HomeController>(context, listen: false).getEmployeeData(),
-    );
+    _controller.getEmployeeData(); 
   }
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<HomeController>(context);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
       child: SingleChildScrollView(
@@ -39,49 +40,47 @@ class _HomeViewBodyState extends State<HomeViewBody> {
               alignment: Alignment.centerLeft,
               child: Text(
                 Strings.kBranch,
-
                 style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w800),
               ),
             ),
             SizedBox(height: 8.h),
-            controller.isLoading
+            _controller.isLoading
                 ? ListView(
                     shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-                  children: [
-                    CustomShimmerFieldWidget(),
-                    SizedBox(height: 6.h),
-                    CustomShimmerFieldWidget(),
-                    SizedBox(height: 6.h),
-                    CustomShimmerFieldWidget(),
-                  ],
-                )
-                : controller.error != null
-                ? Text("Error: ${controller.error}")
-                : controller.employee != null
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: const [
+                      CustomShimmerFieldWidget(),
+                      SizedBox(height: 6),
+                      CustomShimmerFieldWidget(),
+                      SizedBox(height: 6),
+                      CustomShimmerFieldWidget(),
+                    ],
+                  )
+                : _controller.error != null
+                ? Text("Error: ${_controller.error}")
+                : _controller.employee != null
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CustomBranchFieldWidget(
-                        employeeModel: controller.employee!,
+                        employeeModel: _controller.employee!,
                       ),
                       SizedBox(height: 6.h),
                       CustomNameFieldWidget(
-                        employeeModel: controller.employee!,
+                        employeeModel: _controller.employee!,
                       ),
                       SizedBox(height: 6.h),
                       CustomNumberFieldWidget(
-                        employeeModel: controller.employee!,
+                        employeeModel: _controller.employee!,
                       ),
                     ],
                   )
                 : const Text("No data available"),
-
             SizedBox(height: 16.h),
             ListView.separated(
               separatorBuilder: (context, index) => SizedBox(height: 16.h),
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: AppHelper.cards.length,
               itemBuilder: (context, index) {
                 return InkWell(
