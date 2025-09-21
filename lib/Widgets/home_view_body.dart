@@ -1,4 +1,6 @@
+import 'package:first_task/Utilities/app_helper.dart';
 import 'package:first_task/Utilities/strings.dart';
+import 'package:first_task/Widgets/custom_card_widget.dart';
 import 'package:first_task/Widgets/custom_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,7 +37,15 @@ class HomeViewBody extends StatelessWidget {
               ],
             ),
             SizedBox(height: 16.h),
-            // CustomCardWidget(),
+            ListView.separated(
+              separatorBuilder: (context, index) => SizedBox(height: 16.h),
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: AppHelper.cards.length,
+              itemBuilder: (context, index) {
+                return CustomCardWidget(item: AppHelper.cards[index]);
+              },
+            ),
           ],
         ),
       ),
