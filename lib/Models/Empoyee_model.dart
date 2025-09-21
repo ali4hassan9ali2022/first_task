@@ -1,16 +1,16 @@
-class Employee {
+class EmployeeModel {
   final String empNo;
   final String empName;
   final String branch;
 
-  Employee({
+  EmployeeModel({
     required this.empNo,
     required this.empName,
     required this.branch,
   });
 
-  factory Employee.fromJson(Map<String, dynamic> json) {
-    return Employee(
+  factory EmployeeModel.fromJson(Map<String, dynamic> json) {
+    return EmployeeModel(
       empNo: json["EMP_NO"] ?? "",
       empName: json["EMP_NAME"] ?? "",
       branch: json["BRANCH"] ?? "",
