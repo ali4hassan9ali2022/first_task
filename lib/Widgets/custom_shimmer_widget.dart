@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-class CustomShimmerFieldWidget extends StatelessWidget {
-  const CustomShimmerFieldWidget({super.key});
+class CustomShimmerWidget extends StatelessWidget {
+  const CustomShimmerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +33,7 @@ class CustomShimmerFieldWidget extends StatelessWidget {
                 ),
                 SizedBox(width: 8.w),
                 Expanded(
-                  child: Container(
-                    height: 16.sp,
-                    color: Colors.grey.shade400,
-                  ),
+                  child: Container(height: 16.sp, color: Colors.grey.shade400),
                 ),
               ],
             ),

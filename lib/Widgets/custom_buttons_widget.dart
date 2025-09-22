@@ -1,10 +1,14 @@
+
 import 'package:first_task/Utilities/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButtonsWidget extends StatelessWidget {
   const CustomButtonsWidget({
-    super.key, required this.title, required this.iconData, this.onTap
+    super.key,
+    required this.title,
+    required this.iconData,
+    this.onTap,
   });
   final String title;
   final IconData iconData;

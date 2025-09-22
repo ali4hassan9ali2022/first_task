@@ -5,24 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
-class HomeViewBody extends StatefulWidget {
-  const HomeViewBody({super.key});
+class HomeScreenBody extends StatefulWidget {
+  const HomeScreenBody({super.key});
 
   @override
-  State createState() => _HomeViewBodyState();
+  State createState() => _HomeScreenBodyState();
 }
 
-class _HomeViewBodyState extends StateMVC<HomeViewBody> {
+class _HomeScreenBodyState extends StateMVC<HomeScreenBody> {
   late HomeController _controller;
 
-  _HomeViewBodyState() : super(HomeController()) {
+  _HomeScreenBodyState() : super(HomeController()) {
     _controller = controller as HomeController;
   }
 
   @override
   void initState() {
     super.initState();
-    _controller.getEmployeeData();
+    _controller.fetchEmployeeData();
   }
 
   @override
@@ -48,17 +48,17 @@ class _HomeViewBodyState extends StateMVC<HomeViewBody> {
               physics: const NeverScrollableScrollPhysics(),
               children: [
                 CustomButtonsWidget(
-                  title: Strings.kCardItemOne,
+                  title: Strings.kTitleOne,
                   iconData: Icons.home,
                 ),
                 SizedBox(height: 16.h),
                 CustomButtonsWidget(
-                  title: Strings.kCardItemTwo,
+                  title: Strings.kTitleTwo,
                   iconData: Icons.search,
                 ),
                 SizedBox(height: 16.h),
                 CustomButtonsWidget(
-                  title: Strings.kCardItemThree,
+                  title: Strings.kTitleThree,
                   iconData: Icons.person,
                 ),
               ],

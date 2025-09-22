@@ -1,4 +1,4 @@
-import 'package:first_task/Modules/Home/home_view.dart';
+import 'package:first_task/Modules/Home/home_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,7 +16,10 @@ class FirstTask extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(debugShowCheckedModeBanner: false, home: HomeView());
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: HomeScreen(),
+        );
       },
     );
   }

@@ -1,0 +1,17 @@
+import 'package:first_task/Widgets/build_app_bar.dart';
+import 'package:first_task/Widgets/home_Screen_body.dart';
+import 'package:flutter/material.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: Drawer(child: Icon(Icons.menu)),
+      appBar: buildAppBar(),
+      backgroundColor: Colors.white,
+      body: HomeScreenBody(),
+    );
+  }
+}
