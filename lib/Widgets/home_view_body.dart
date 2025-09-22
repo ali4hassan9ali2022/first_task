@@ -1,9 +1,6 @@
 import 'package:first_task/Modules/Home/home_controller.dart';
-import 'package:first_task/Utilities/app_helper.dart';
 import 'package:first_task/Utilities/strings.dart';
-import 'package:first_task/Widgets/custom_card_widget.dart';
-import 'package:first_task/Widgets/custom_field_widget.dart';
-import 'package:first_task/Widgets/custom_shimmer_field_widget.dart';
+import 'package:first_task/Widgets/custom_buttons_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -25,7 +22,7 @@ class _HomeViewBodyState extends StateMVC<HomeViewBody> {
   @override
   void initState() {
     super.initState();
-    _controller.getEmployeeData(); 
+    _controller.getEmployeeData();
   }
 
   @override
@@ -44,49 +41,27 @@ class _HomeViewBodyState extends StateMVC<HomeViewBody> {
               ),
             ),
             SizedBox(height: 8.h),
-            _controller.isLoading
-                ? ListView(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: const [
-                      CustomShimmerFieldWidget(),
-                      SizedBox(height: 6),
-                      CustomShimmerFieldWidget(),
-                      SizedBox(height: 6),
-                      CustomShimmerFieldWidget(),
-                    ],
-                  )
-                : _controller.error != null
-                ? Text("Error: ${_controller.error}")
-                : _controller.employee != null
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomBranchFieldWidget(
-                        employeeModel: _controller.employee!,
-                      ),
-                      SizedBox(height: 6.h),
-                      CustomNameFieldWidget(
-                        employeeModel: _controller.employee!,
-                      ),
-                      SizedBox(height: 6.h),
-                      CustomNumberFieldWidget(
-                        employeeModel: _controller.employee!,
-                      ),
-                    ],
-                  )
-                : const Text("No data available"),
+            _controller.buildBody(controller: _controller),
             SizedBox(height: 16.h),
-            ListView.separated(
-              separatorBuilder: (context, index) => SizedBox(height: 16.h),
+            ListView(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: AppHelper.cards.length,
-              itemBuilder: (context, index) {
-                return InkWell(
-                  child: CustomCardWidget(item: AppHelper.cards[index]),
-                );
-              },
+              children: [
+                CustomButtonsWidget(
+                  title: Strings.kCardItemOne,
+                  iconData: Icons.home,
+                ),
+                SizedBox(height: 16.h),
+                CustomButtonsWidget(
+                  title: Strings.kCardItemTwo,
+                  iconData: Icons.search,
+                ),
+                SizedBox(height: 16.h),
+                CustomButtonsWidget(
+                  title: Strings.kCardItemThree,
+                  iconData: Icons.person,
+                ),
+              ],
             ),
           ],
         ),

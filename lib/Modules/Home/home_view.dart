@@ -7,7 +7,11 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: buildAppBar(),
+    return Scaffold(
+    drawer: Drawer(
+      child: Icon(Icons.menu),
+    ),
+    appBar: buildAppBar(),
     backgroundColor: Colors.white,
     body: HomeViewBody(),
     );

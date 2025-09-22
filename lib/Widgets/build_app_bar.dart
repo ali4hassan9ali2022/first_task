@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 AppBar buildAppBar() {
   return AppBar(
     backgroundColor: AppColor.kPrimaryColor,
-    leading: Icon(Icons.menu, color: Colors.white),
+    iconTheme: const IconThemeData(
+      color: Colors.white, 
+    ),
     title: Text(
       Strings.kTitleAppBar,
       style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
